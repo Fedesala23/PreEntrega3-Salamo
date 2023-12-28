@@ -246,3 +246,59 @@ a{
 .disabled{
     display: none;
 }
+
+/* Formulario */
+
+.form-box{
+    height: 640px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    background: linear-gradient(180deg, #FC466B 0%, #3F5EFB 100%);
+    padding: 30px;
+    border-radius: 1rem;
+}
+
+.form-title{
+    text-align: center;
+    font-size: 2rem;
+}
+
+.form-group{
+    margin: 30px;
+}
+
+.input-form{
+    font-size: 16px;
+    padding: 6px;
+    border: none;
+    border-radius: .3rem;
+    display: block;
+}
+
+.warnings{
+    width: 200px;
+    text-align: center;
+    margin: auto;
+    padding-top: 15px;
+    color: rgb(233, 233, 233);
+}
+
+.form-button{
+    background: #f01a45;
+    color: #ececec;
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    height: 40px;
+    font-size: 14px;
+    border: none;
+    border-radius: .3rem;
+    cursor: pointer;
+}
+
+
+
