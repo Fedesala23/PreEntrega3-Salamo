@@ -1,171 +1,13 @@
-// Arrays de objetos
+// Array de objetos
 
-const products =[
-    // Buzos
-    {
-        id: "buzo-jordan-01",
-        title: "Buzo Jordan Brooklyn",
-        img: "./Galery/Img/buzo-jordan-01.jpg",
-        category:{
-            name: "Buzos",
-            id: "Buzos",
-        },
-        price: 64.999,
-    },
-    {
-        id: "buzo-puma-02",
-        title: "Buzo Puma Squad Fl",
-        img: "./Galery/Img/buzo-puma-02.jpg",
-        category:{
-            name: "Buzos",
-            id: "Buzos",
-        },
-        price: 46.999,
-    },
-    {
-        id: "buzo-nike-03",
-        title: "Buzo Urbano Nike Sportwear",
-        img: "./Galery/Img/buzo-nike-03.jpg",
-        category:{
-            name: "Buzos",
-            id: "Buzos",
-        },
-        price: 57.999,
-    },
-    {
-        id: "buzo-puma-04",
-        title: "Buzo Puma X Trp",
-        img: "./Galery/Img/buzo-puma-04.jpg",
-        category:{
-            name: "Buzos",
-            id: "Buzos",
-        },
-        price: 67.999,
-    },
-    // Pantalones
-    {
-        id: "pantalon-adidas-01",
-        title: "Pantalón Adidas Always",
-        img: "./Galery/Img/pantalon-adidas-01.jpg",
-        category:{
-            name: "Pantalones",
-            id: "Pantalones",
-        },
-        price: 85.699,
-    },
-    {
-        id: "pantalon-puma-02",
-        title: "Pantalón Puma X Trp",
-        img: "./Galery/Img/pantalon-puma-02.jpg",
-        category:{
-            name: "Pantalones",
-            id: "Pantalones",
-        },
-        price: 65.999,
-    },
-    {
-        id: "pantalon-nike-03",
-        title: "Patalón Nike Sportwear",
-        img: "./Galery/Img/pantalon-nike-03.jpg",
-        category:{
-            name: "Pantalones",
-            id: "Pantalones",
-        },
-        price: 74.799,
-    },
-    {
-        id: "pantalon-adidas-04",
-        title: "Pantalón Adidas Mat",
-        img: "./Galery/Img/pantalon-adidas-04.jpg",
-        category:{
-            name: "Pantalones",
-            id: "Pantalones",
-        },
-        price: 22.999,
-    },
-    // Remeras
-    {
-        id: "remera-jorda-01",
-        title: "Remera Jordan Essentials",
-        img: "./Galery/Img/remera-jordan-01.jpg",
-        category:{
-            name: "Remeras",
-            id: "Remeras",
-        },
-        price: 29.499,
-    },
-    {
-        id: "remeras-adidas-02",
-        title: "Remera adidas City Escape",
-        img: "./Galery/Img/remera-adidas-02.jpg",
-        category:{
-            name: "Remeras",
-            id: "Remeras",
-        },
-        price: 49.999,
-    },
-    {
-        id: "remera-nike-03",
-        title: "Remera Urbana Nike Icon",
-        img: "./Galery/Img/remera-nike-03.jpg",
-        category:{
-            name: "Remeras",
-            id: "Remeras",
-        },
-        price: 25.999,
-    },
-    {
-        id: "remera-nike-04",
-        title: "Remera Nike Nsw",
-        img: "./Galery/Img/remera-nike-04.jpg",
-        category:{
-            name: "Remeras",
-            id: "Remeras",
-        },
-        price: 22.499,
-    },
-    // Zapatillas
-    {
-        id: "zapatillas-jordan-01",
-        title: "Zapatillas Jordan 1 Zoom",
-        img: "./Galery/Img/zapatillas-jordan-01.jpg",
-        category:{
-            name: "Zaptillas",
-            id: "Zapatillas",
-        },
-        price: 182.999,
-    },
-    {
-        id: "zapatillas-nike-02",
-        title: "Zapatillas Nike Air Force 1 07 Lv8",
-        img: "./Galery/Img/zapatillas-nike-02.jpg",
-        category:{
-            name: "Zapatillas",
-            id: "Zapatillas",
-        },
-        price: 156.499,
-    },
-    {
-        id: "zapatillas-adidas-03",
-        title: "Zapatillas adidas Nmd G1",
-        img: "./Galery/Img/zapatillas-adidas-03.jpg",
-        category:{
-            name: "Zapatillas",
-            id: "Zapatillas",
-        },
-        price: 104.199,
-    },
-    {
-        id: "zapatillas-puma-04",
-        title: "Zapatillas Puma Suede Classic",
-        img: "./Galery/Img/zapatillas-puma-04.jpg",
-        category:{
-            name: "Zapatillas",
-            id: "Zapatillas",
-        },
-        price: 65.999,
-    },
-]
+let products =[]
+
+fetch("./js/productos.json")
+    .then(response => response.json())
+    .then(data =>{
+        products = data;
+        loadProducts(products);
+    })
 
 // Llamado del DOM
 
@@ -198,8 +40,6 @@ function loadProducts(productsSelected){
 
     updateButtonsAdd();
 }
-
-loadProducts(products);
 
 //Activar botones de categoria y filtrar
 
@@ -243,6 +83,23 @@ if(productsInCartLocalStorage){
 
 
 function addToCart(event){
+    Toastify({
+        text: "Agregado al carrito.",
+        duration: 3000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "center", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, #FC466B, #3F5EFB)",
+          borderRadius: "1rem",
+        },
+        
+        onClick: function(){} // Callback after click
+      }).showToast();
+
     const idButton = event.currentTarget.id;
     const productAdd = products.find(product => product.id === idButton);
     if(productsInCart.some(product => product.id === idButton)){

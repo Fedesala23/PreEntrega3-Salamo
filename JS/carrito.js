@@ -78,6 +78,23 @@ function updateButtonsDelete (){
 }
 
 function deleteCart (event){
+    Toastify({
+        text: "Producto eliminado.",
+        duration: 3000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "center", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, #f00606, #f00606)",
+          borderRadius: "1rem",
+        },
+        
+        onClick: function(){} // Callback after click
+      }).showToast();
+
     const idButton = event.currentTarget.id;
     const index = productsInCart.findIndex(product => product.id === idButton);
     productsInCart.splice(index, 1);
@@ -89,10 +106,43 @@ function deleteCart (event){
 cartActionEmpty.addEventListener("click", emptyCart);
 
 function emptyCart(){
-    productsInCart.length = 0;
-    localStorage.setItem("products-in-cart", JSON.stringify(productsInCart));
-    updateProductsCart();
-}
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success",
+          cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+      });
+      swalWithBootstrapButtons.fire({
+        title: "¿Estás seguro?",
+        text: "¡Se borrarán todos tus productos!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Si",
+        cancelButtonText: "No, cancelar",
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {    
+            productsInCart.length = 0;
+            localStorage.setItem("products-in-cart", JSON.stringify(productsInCart));
+            updateProductsCart();
+          swalWithBootstrapButtons.fire({
+            title: "Eliminado",
+            text: "Se borraron todos tus productos.",
+            icon: "error"
+          });
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire({
+            title: "Cancelado",
+            text: "Sigue con tu compra",
+            icon: "success" 
+          });
+        }
+      });
+    }
 
 function updateTotal (){
     const totalResult = productsInCart.reduce((acc, product) => acc +(product.price * product.amount), 0);
